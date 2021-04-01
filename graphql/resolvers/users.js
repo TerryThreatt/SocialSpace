@@ -6,6 +6,15 @@ const { validateRegisterInput, validateLoginInput } = require('../../utils/valid
 const { SECRET_KEY } = require("../../config")
 const User = require("../../models/User")
 
+
+function generateToken(user) {
+    return jwt.sign({
+            id: res.id,
+            email: res.email,
+            username: res.username
+        },
+        SECRET_KEY, { expiresIn: '1h'})
+}
 module.exports = {
     Mutation: {
         async login(_, { usename, password }) {
@@ -22,6 +31,8 @@ module.exports = {
                 errors.general = 'Wrong credentials'
                 throw new UserInputError('wrong credentials', { errors })
             }
+
+            const token = generateToken(user)
         },
         async register(
             _,
@@ -61,11 +72,7 @@ module.exports = {
 
             const res = await newUser.save()
 
-            const token = jwt.sign({
-                id: res.id,
-                email: res.email,
-                username: res.username
-            }, SECRET_KEY, { expiresIn: '1h'})
+            const token = generateToken(res)
 
             return {
                 ...res._doc,
