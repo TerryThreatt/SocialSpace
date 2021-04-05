@@ -10,7 +10,8 @@ const { DB } = require('./config')
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req })
 })
 
 mongoose.connect(DB, {useNewUrlParser: true})
