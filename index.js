@@ -1,5 +1,4 @@
 const { ApolloServer } = require('apollo-server')
-const gql = require('graphql-tag')
 const mongoose = require('mongoose')
 
 const typeDefs = require('./graphql/typeDefs')
@@ -20,4 +19,7 @@ mongoose.connect(DB, {useNewUrlParser: true})
     })
     .then((res) => {
         console.log(`Server running at ${res.url}`)
+    })
+    .catch(err => {
+        console.log(err)
     })
