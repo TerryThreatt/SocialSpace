@@ -1,13 +1,16 @@
 import React from 'react'
 import App from './App'
-import ApolloClient from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+
+
 
 const client = new ApolloClient({
-    link: 'http://localhost:5000'
-})
+    uri: 'http://localhost:5000',
+    cache: new InMemoryCache()
+  });
 
 export default (
-    <ApolloClient client={client}>
+    <ApolloProvider client={client}>
         <App />
-    </ApolloClient>
+    </ApolloProvider>
 )
