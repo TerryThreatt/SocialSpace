@@ -25,14 +25,14 @@ function PostCard({ post: { body, createdAt, id, username, likeCount, commentCou
           <Card.Meta as={Link} to={`/posts/${id}`}>
             {moment(createdAt).fromNow(true)}
           </Card.Meta>
-          <Card.Description>
+          <Card.Description >
             {body}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
             <Button as="div" labelPosition="right" onClick={likePost}>
               <Button color="teal" basic>
-                <Icon name="heart" />
+                <Icon name="heart outline" />
               </Button>
               <Label basic color="teal" pointing="left">
                 {likeCount}
@@ -40,7 +40,7 @@ function PostCard({ post: { body, createdAt, id, username, likeCount, commentCou
             </Button>
             <Button as="div" labelPosition="right" onClick={commentOnPost}>
               <Button color="blue" basic>
-                <Icon name="comments" />
+                <Icon name="comments outline" />
               </Button>
               <Label basic color="blue" pointing="left">
                 {commentCount}
