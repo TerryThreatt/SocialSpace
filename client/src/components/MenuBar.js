@@ -23,18 +23,18 @@ function MenuBar() {
           />
           <Menu.Menu position ='right'>
           <Menu.Item
-            name='register'
-            active={activeItem === 'register'}
-            onClick={handleItemClick}
-            as={Link}
-            to="/register"
-          />
-          <Menu.Item
             name='login'
             active={activeItem === 'login'}
             onClick={handleItemClick}
             as={Link}
             to="/login"
+          />
+          <Menu.Item
+            name='register'
+            active={activeItem === 'register'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/register"
           />
           </Menu.Menu>
 
