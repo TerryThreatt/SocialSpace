@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
+import gql from 'graphql-tag'
 
 function Register() {
     const [values, setValues] = useState({
@@ -8,6 +9,15 @@ function Register() {
         password: "",
         confirmPassword: ""
     })
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+    }
+
+    const onChange = (e) => {
+        setValues({...values, [e.target.name]: e.target.value})
+    }
 
     return (
         <div>
@@ -41,9 +51,33 @@ function Register() {
                     value={values.confirmPassword}
                     onChange={onChange}
                 />
+                <Button type="submit" primary>Register</Button>
             </Form>
         </div>
     )
 }
+
+// Register Mutation
+const REGISTER_USER = gql`
+    mutation Register(
+        $usename: String!
+        $email: String!
+        $password: String!
+        $confirmPassword: String!
+    ) {
+        register(
+            registerInput: {
+                username: $username
+                email: $email
+                password: $password
+                confirmPassword: $confirmPassword
+            }
+        )
+        {
+            id email username createdAt token
+        }
+    }
+`
+
 
 export default Register
