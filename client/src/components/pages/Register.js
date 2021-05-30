@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 
 function Register() {
+    const [errors, setErrors] = useState({})
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -19,6 +20,9 @@ function Register() {
         update(proxy, result){
             console.log(result)
         },
+        onError(err){
+            setErrors(err && err.graphQLErrors[0] ? err.graphQLErrors[0].extensions.exception.errors : {})
+        },
         variables: values
     })
 
@@ -29,18 +33,20 @@ function Register() {
 
 
     return (
-        <div>
-            <Form onSubmit={onSubmit} noValidate>
+        <div  className="form-container">
+            <Form onSubmit={onSubmit} noValidate className={ loading ? "loading" : null}>
                 <h1>Register</h1>
                 <Form.Input
                     label="Username"
                     placeholder="Username"
+                    type="text"
                     name="username"
                     value={values.username}
                     onChange={onChange}
                 />
                 <Form.Input
                     label="Email"
+                    type="email"
                     placeholder="Email"
                     name="email"
                     value={values.email}
@@ -48,6 +54,7 @@ function Register() {
                 />
                 <Form.Input
                     label="Password"
+                    type="password"
                     placeholder="Password"
                     name="password"
                     value={values.password}
@@ -55,6 +62,7 @@ function Register() {
                 />
                 <Form.Input
                     label="Confirm Password"
+                    type="password"
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     value={values.confirmPassword}
@@ -68,7 +76,7 @@ function Register() {
 
 // Register Mutation
 const REGISTER_USER = gql`
-    mutation Register(
+    mutation register(
         $usename: String!
         $email: String!
         $password: String!
@@ -77,16 +85,15 @@ const REGISTER_USER = gql`
         register(
             registerInput: {
                 username: $username
-                email: $email
                 password: $password
                 confirmPassword: $confirmPassword
+                email: $email
             }
         )
         {
-            id email username createdAt token
+            id email token username createdAt
         }
     }
 `
-
 
 export default Register
