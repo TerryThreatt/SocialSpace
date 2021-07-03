@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
-import { useForm } from './../../../../utils/hooks'
+import { useForm } from '../../utils/hooks'
 
 function Register(props) {
     const [ errors , setErrors] = useState({})
 
-    const { onChange, onSubmit, values } = useForm(addUser, {
+    const { onChange, onSubmit, values } = useForm(registerUser, {
         username: "",
         email: "",
         password: "",
@@ -25,6 +25,9 @@ function Register(props) {
         variables: values
     })
 
+    function registerUser(){
+        addUser()
+    }
 
     return (
       <div className="form-container">
