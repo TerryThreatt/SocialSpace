@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 
 function Register() {
-    const [errors, setErrors] = useState({})
+    const [ errors , setErrors] = useState({})
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -21,6 +21,7 @@ function Register() {
             console.log(result)
         },
         onError(err){
+            console.log(err && err.graphQLErrors[0] ? err.graphQLErrors[0].extensions.exception.errors : {})
             setErrors(err && err.graphQLErrors[0] ? err.graphQLErrors[0].extensions.exception.errors : {})
         },
         variables: values
@@ -33,45 +34,60 @@ function Register() {
 
 
     return (
-        <div  className="form-container">
-            <Form onSubmit={onSubmit} noValidate className={ loading ? "loading" : null}>
-                <h1>Register</h1>
-                <Form.Input
-                    label="Username"
-                    placeholder="Username"
-                    type="text"
-                    name="username"
-                    value={values.username}
-                    onChange={onChange}
-                />
-                <Form.Input
-                    label="Email"
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    value={values.email}
-                    onChange={onChange}
-                />
-                <Form.Input
-                    label="Password"
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={values.password}
-                    onChange={onChange}
-                />
-                <Form.Input
-                    label="Confirm Password"
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="confirmPassword"
-                    value={values.confirmPassword}
-                    onChange={onChange}
-                />
-                <Button type="submit" primary>Register</Button>
-            </Form>
-        </div>
-    )
+      <div className="form-container">
+        <Form
+          onSubmit={onSubmit}
+          noValidate
+          className={loading ? "loading" : null}
+        >
+          <h1>Register</h1>
+          <Form.Input
+            label="Username"
+            placeholder="Username"
+            type="text"
+            name="username"
+            value={values.username}
+            onChange={onChange}
+          />
+          <Form.Input
+            label="Email"
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={values.email}
+            onChange={onChange}
+          />
+          <Form.Input
+            label="Password"
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={values.password}
+            onChange={onChange}
+          />
+          <Form.Input
+            label="Confirm Password"
+            type="password"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            value={values.confirmPassword}
+            onChange={onChange}
+          />
+          <Button type="submit" primary>
+            Register
+          </Button>
+        </Form>
+        {Object.keys(errors).length > 0 && (
+          <div className="ui error message">
+            <ul className="list">
+              {Object.values(errors).map((value) => (
+                <li key={value}>{value}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    );
 }
 
 // Register Mutation
