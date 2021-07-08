@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { Form, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-
-import { useForm } from '../../utils/hooks';
+import React, { useState } from "react";
+import { Button, Form } from "semantic-ui-react";
+import { useForm } from "../../utils/hooks";
 
 function Login(props) {
   const [errors, setErrors] = useState({});
 
-  const [ onChange, onSubmit, values ] = useForm(loginUserCB, {
-    username: '',
-    password: ''
-  })
+  const { onChange, onSubmit, values } = useForm(loginUserCB, {
+    username: "",
+    password: "",
+  });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, result) {
@@ -34,7 +33,7 @@ function Login(props) {
 
   function loginUserCB() {
     loginUser();
-  };
+  }
 
   return (
     <div className="form-container">
@@ -83,14 +82,8 @@ function Login(props) {
 
 // Register Mutation
 const LOGIN_USER = gql`
-  mutation login(
-    $usename: String!
-    $password: String!
-  ) {
-    login(
-        username: $username
-        password: $password
-    ) {
+  mutation login($usename: String!, $password: String!) {
+    login(username: $username, password: $password) {
       id
       email
       token
