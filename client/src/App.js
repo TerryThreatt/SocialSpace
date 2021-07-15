@@ -2,6 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 
+import { AuthProvider } from './context/auth'
+
 import Menubar from './components/MenuBar'
 import Login from '../src/components/pages/Login'
 import Home from '../src/components/pages/Home'
@@ -12,14 +14,16 @@ import './App.css'
 
 function App() {
   return (
+    <AuthProvider>
       <Router>
         <Container>
-          <Menubar/>
-          <Route exact path='/' component={Home}/>
-          <Route exact path='/register' component={Register}/>
-          <Route exact path='/login' component={Login}/>
+          <Menubar />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
         </Container>
       </Router>
+    </AuthProvider>
   );
 }
 

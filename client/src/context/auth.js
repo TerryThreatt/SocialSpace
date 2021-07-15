@@ -46,3 +46,5 @@ function AuthProvider(props) {
     />
   )
 }
+
+export { AuthContext, AuthProvider }
