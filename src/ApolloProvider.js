@@ -10,7 +10,7 @@ import { setContext } from '@apollo/client/link/context'
 
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000"
+  uri: "http://https://social-swap.herokuapp.com",
 });
 
 const authLink = setContext((_, { headers }) => {
