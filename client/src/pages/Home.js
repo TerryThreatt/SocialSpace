@@ -27,7 +27,7 @@ function Home() {
           <h1>Loading posts..</h1>
         ) : (
           <Transition.Group>
-            {data.getPosts &&
+            {data &&
               data.getPosts.map((post) => (
                 <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
                   <PostCard post={post} />
