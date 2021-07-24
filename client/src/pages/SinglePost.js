@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef } from "react";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import moment from "moment";
 import {
   Button,
@@ -15,7 +15,7 @@ import {
 import { AuthContext } from "../context/auth";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
-import MyPopup from "../util/MyPopup";
+import MyPopup from "../util/myPopup";
 
 function SinglePost(props) {
   const postId = props.match.params.postId;
