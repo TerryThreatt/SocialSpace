@@ -1,16 +1,13 @@
-import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container } from 'semantic-ui-react'
-
-import { AuthProvider } from './context/auth'
-
-import Menubar from './components/MenuBar'
-import Login from '../src/components/pages/Login'
-import Home from '../src/components/pages/Home'
-import Register from '../src/components/pages/Register'
-
-import 'semantic-ui-css/semantic.min.css'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "semantic-ui-css/semantic.min.css";
+import { Container } from "semantic-ui-react";
+import Home from "../src/components/pages/Home";
+import Login from "../src/components/pages/Login";
+import Register from "../src/components/pages/Register";
+import "./App.css";
+import Menubar from "./components/MenuBar";
+import { AuthProvider } from "./context/auth";
 
 function App() {
   return (
