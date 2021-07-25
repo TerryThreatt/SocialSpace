@@ -1,16 +1,14 @@
-import React from "react";
-import App from "./App";
 import {
   ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  createHttpLink
+  ApolloProvider, createHttpLink, InMemoryCache
 } from "@apollo/client";
-import { setContext } from '@apollo/client/link/context'
+import { setContext } from '@apollo/client/link/context';
+import React from "react";
+import App from "./App";
 
 
 const httpLink = createHttpLink({
-  uri: "http://https://social-swap.herokuapp.com",
+  uri: "https://social-swap.herokuapp.com",
 });
 
 const authLink = setContext((_, { headers }) => {
